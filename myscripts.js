@@ -26,3 +26,28 @@ function fibsRec(n) {
 fibsRec(8);
 
 console.log(fibsRec(9));
+
+function merge(left, right) {
+  let sortedArr = [];
+
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      sortedArr.push(left.shift());
+    } else {
+      sortedArr.push(right.shift());
+    }
+  }
+
+  return [...sortedArr, ...left, ...right];
+}
+
+function mergeSort(unsortedArr) {
+  if (unsortedArr.length === 1) {
+    return unsortedArr;
+  }
+  let middle = Math.floor(unsortedArr.length / 2);
+  let leftArr = mergeSort(unsortedArr.slice(0, middle));
+  let rightArr = mergeSort(unsortedArr.slice(middle));
+
+  return merge(leftArr, rightArr);
+}
